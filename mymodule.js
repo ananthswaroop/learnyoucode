@@ -10,7 +10,7 @@ module.exports = function filterDir (dir,ext,callback)    {
        	  }	
         
           var returnList = [];
-    
+         
           list.forEach(function(file){
              if(path.extname(file) == '.'+ext){
                 returnList.push(file);

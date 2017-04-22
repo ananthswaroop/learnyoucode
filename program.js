@@ -27,21 +27,28 @@ fs.readdir(directory, function(err, items) {
      });
 })*/
 
-var fs = require('fs')
+//var fs = require('fs')
 
-var filterDir = require('./mymodule.js')
+//var filterDir = require('./mymodule.js')
 
 
-filterDir (process.argv[2],process.argv[3],function(err,list){
-    if(err) {
-        return console.log(err);
-    } else {
-        list.forEach(function(file){
-           console.log(file); 
-        })
-    }
+//filterDir (process.argv[2],process.argv[3],function(err,list){
+  //  if(err) {
+      //  return console.log(err);
+    //} else {
+        //list.forEach(function(file){
+          // console.log(file); 
+        //})
+    //}
     
     
+//})
+
+var http = require('http')
+
+http.get(process.argv[2], function(response) {
+    response.setEncoding('utf-8')
+    response.on("data",console.log);
+    response.on("error",console.error);
 })
-
 
