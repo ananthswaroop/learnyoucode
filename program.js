@@ -44,11 +44,85 @@ fs.readdir(directory, function(err, items) {
     
 //})
 
-var http = require('http')
+//var http = require('http')
 
-http.get(process.argv[2], function(response) {
-    response.setEncoding('utf-8')
-    response.on("data",console.log);
-    response.on("error",console.error);
-})
+//http.get(process.argv[2], function(response) {
+  //  response.setEncoding('utf-8');
+  //  response.on("data",console.log);
+  //  response.on("error",console.error);
+//})
+
+/*   var http = require("http")
+     var bl = require("bl")
+
+     http.get(process.argv[2],function(response) {
+        response.setEncoding('utf-8');
+        response.pipe(bl(function (err, data) { 
+        if(err) {
+            return console.error(err)
+        }
+        var length = data.toString().length;
+        console.log(length);
+        console.log(data.toString());
+     }));     
+})  */
+
+/*var http = require("http")
+  var bl = require("bl")
+
+    http.get(process.argv[2] , function(response) {
+        response.setEncoding('utf-8');
+        response.pipe(bl(function (err, data) { 
+            if(err) {
+                return console.error(err)
+            }
+            console.log(data.toString());
+            http.get(process.argv[3],function(response){
+                response.setEncoding('utf-8');
+                response.pipe(bl(function (err, data) { 
+                if(err) {
+                    return console.error(err)
+                }
+                console.log(data.toString());
+                
+                        http.get(process.argv[4],function(response){
+                            response.setEncoding('utf-8');
+                            response.pipe(bl(function (err, data) { 
+                                if(err) {
+                                    return console.error(err)
+                                }
+                                console.log(data.toString());
+                            }))
+                        })
+                
+                }))
+            })
+        }))
+    }); */
+
+
+
+var net = require('net') 
+        
+    function pad(n) { 
+            return n < 10 ? '0' + n : n 
+    }
+        
+    var server = net.createServer(function (socket) {  
+    var date = new Date();
+                 
+    var data = pad(date.getFullYear()) + "-" + 
+               pad(date.getMonth() + 1) + "-" + 
+               pad(date.getDate()) + " " +
+               pad(date.getHours()) + ":" +
+               pad(date.getMinutes()) + "\n";
+    socket.write(data);
+    socket.end();
+                    
+    })  
+    server.listen(process.argv[2])
+   
+
+
+
 
