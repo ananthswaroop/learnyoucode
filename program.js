@@ -102,7 +102,7 @@ fs.readdir(directory, function(err, items) {
 
 
 
-var net = require('net') 
+/*var net = require('net') 
         
     function pad(n) { 
             return n < 10 ? '0' + n : n 
@@ -120,7 +120,16 @@ var net = require('net')
     socket.end();
                     
     })  
-    server.listen(process.argv[2])
+    server.listen(process.argv[2]) */
+
+ var http = require('http')  
+ var fs = require('fs')
+ var fileReadStream = fs.createReadStream(process.argv[3]) 
+ var server = http.createServer(function (req, res) {  
+         fileReadStream.pipe(res)
+ })  
+
+server.listen(process.argv[2])  
    
 
 
